@@ -111,16 +111,16 @@ docker compose ps
 极空间 Z4Pro 使用 ZFS 存储池，典型路径格式为：
 
 ```
-/tmp/zfsv3/sata11/13143360616/data/电影
-/tmp/zfsv3/sata11/13143360616/data/qb/downloads
-/tmp/zfsv3/sata11/13143360616/data/电视剧
+/tmp/zfsv3/<存储池>/<用户ID>/data/电影
+/tmp/zfsv3/<存储池>/<用户ID>/data/qb/downloads
+/tmp/zfsv3/<存储池>/<用户ID>/data/电视剧
 ```
 
 修改 [docker-compose.yml](docker-compose.yml) 中的卷映射以匹配实际路径。
 
 ### 与 tinyMediaManager 共存
 
-如果已在极空间上运行 TMM（参考 `docker-compose.tmm.yml`），建议：
+如果已在极空间上运行 TMM，建议：
 - 使用相同 `network_mode: bridge`（已在 compose 中配置）
 - 映射相同的媒体目录路径
 - 端口不冲突（TMM 使用 4399，MediaLens 使用 8000）
@@ -128,16 +128,21 @@ docker compose ps
 ### SSH 部署步骤
 
 ```bash
-# 通过 SSH 连接到极空间
-ssh -p 10000 user@192.168.31.8
+# 通过 SSH 连接到极空间（端口和IP以实际为准）
+ssh -p <SSH端口> <用户名>@<极空间IP>
 
-# 将项目文件上传到极空间
-# 或者直接在极空间上 git clone
+# 拉取代码
+git clone https://github.com/gg480/medialens.git
+cd medialens
 
-# 进入项目目录
-cd /path/to/medialens
+# 创建配置文件和数据目录
+cp .env.docker .env
+mkdir -p data config
 
-# 启动
+# 编辑 .env 填入 TMDB API Key
+# vim .env
+
+# 启动（通过 GitHub Actions 构建的镜像，无需本地编译）
 docker compose up -d
 ```
 
