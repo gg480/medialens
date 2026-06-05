@@ -1,0 +1,43 @@
+[project]
+name = "medialens"
+version = "0.1.0"
+description = "LLM 辅助的智能媒体刮削重命名工具"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+
+dependencies = [
+    "guessit>=3.8.0",
+    "tmdbv3api>=1.9.0",
+    "click>=8.1.0",
+    "Jinja2>=3.1.0",
+    "pyyaml>=6.0",
+    "litellm>=1.0.0",
+    "rich>=13.0.0",
+    "httpx>=0.27.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.27.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "httpx>=0.27.0",
+]
+
+[project.scripts]
+medialens = "medialens.cli.main:cli"
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["medialens*"]
+
+[tool.setuptools.package-data]
+"medialens" = ["py.typed"]
+

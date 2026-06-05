@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.so
+
+# Environment
+.env
+.env.local
+venv/
+.venv/
+
+# Project data
+data/*.db
+data/images/
+config/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Trae AI agent files
+.trae/
+
+# Docker
+.dockerignore
+
+# Test artifacts
+.pytest_cache/
+.mypy_cache/
